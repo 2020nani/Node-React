@@ -76,3 +76,27 @@ width:18vw;
 margin-right: 1vw;
 margin-left: 2vw;
 `
+export const MenuContainer = styled.div`
+width: 100vw;
+display:flex;
+justify-content:center;
+align-items:center;
+span{
+  font-size: 1.1rem;
+  color:${function (props) { 
+    let color = ""
+    props.theme == "escuro" ? color = "white" : color = "black" 
+    return color } };
+}
+button{
+  border: none;
+  background: none;
+  width: 10vw;
+}
+div{
+  width: 50vw;
+  display:flex;
+  justify-content:space-between;
+  align-items:center
+}
+`

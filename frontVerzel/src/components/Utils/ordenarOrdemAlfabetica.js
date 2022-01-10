@@ -1,5 +1,10 @@
 export default function(lista) {
-    const listaOrdenada = lista.sort(function (a, b) {
+    let listaOrdenada = [];
+    if(!lista) {
+      return listaOrdenada
+      
+    }
+    listaOrdenada = lista.sort(function (a, b) {
         if (a.modulo.nome > b.modulo.nome) {
           return 1;
         }

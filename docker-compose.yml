@@ -5,7 +5,7 @@ services:
         container_name: front-verzel
         build:
             context: ./frontVerzel
-            dockerfile: Dockerfile
+            dockerfile: ./dockerfile
         volumes:
             - './frontVerzel:/app'
             - '/app/node_modules'
@@ -15,11 +15,12 @@ services:
             - NODE_ENV=development
   back: ## nome do serviço
     build:
-      dockerfile: ./Dockerfile
+      dockerfile: ./dockerfile
       context: ./serverVerzel
     command: >
-      sh -c "npm start &&
-             yarn sequelize db:migrate"
+      sh -c "npm install &&
+      yarn sequelize db:migrate
+      && npm start"
     ports:
       - "3333:3333" ## redirecionamento de porta quando chegar alguma requisição na porta 3000 chama o container na porta 3000
     volumes:

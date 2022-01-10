@@ -21,7 +21,7 @@ font-family: Arial, Helvetica, sans-serif;
     width:30vw
 };
 @media (max-width:600px) {
-  width:80%
+  width:80vw
 }
 `
 export const Conteudo = styled.ul`
@@ -33,8 +33,8 @@ align-items:center;
 @media (max-width:1100px) {
   width:30vw
   };
-@media (max-width:600px) {
-    width:80%
+@media (max-width:700px) {
+    width:80vw
 }
 `
 export const TitleAula = styled.li`
@@ -47,26 +47,25 @@ margin: 3vh 4vw 2vh 0;
 strong{
   color: blue;
 }
-span{
-  width: 15vw;
-  height:5vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+span{   
+  width: 13vw;
+  height: 6vh;
+  size:1rem;
+  text-align: center;
   border: 3px solid white;
   border-radius: 20px;
   color: white
   @media (max-width:1100px) {
     width:90%
   }
-  @media (max-width:600px) {
+  @media (max-width:700px) {
     width:70%
   }
 }
 @media (max-width:1100px) {
   width:25vw
   };
-@media (max-width:600px) {
+@media (max-width:700px) {
   width:70%
 }
 `
@@ -81,14 +80,14 @@ border-radius: 20px;
 margin: 3vh 4vw 2vh 0;
 img{
   width: 5vw
-  @media (max-width:600px) {
+  @media (max-width:700px) {
     width:20%
   }
 }
 @media (max-width:1100px) {
   width:25vw
 };
-@media (max-width:600px) {
+@media (max-width:700px) {
   width:70%
 }
 `
@@ -106,7 +105,7 @@ h2{
 @media (max-width:1100px) {
   width:25vw
 }
-@media (max-width:600px) {
+@media (max-width:700px) {
   width:70%
 }
 `
@@ -123,7 +122,7 @@ h3{
 @media (max-width:1100px) {
   width:25vw
 }
-@media (max-width:600px) {
+@media (max-width:700px) {
   width:70%
 }
 `
@@ -146,7 +145,7 @@ button{
 @media (max-width:1100px) {
   width:25vw
 }
-@media (max-width:600px) {
+@media (max-width:700px) {
   width:70%
 }
 `

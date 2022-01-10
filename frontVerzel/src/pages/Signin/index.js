@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Container, Conteudo } from './styles'
 import { Field, Form, Formik } from 'formik';
+import { GiAtom } from "react-icons/gi";
 import * as Yup from 'yup';
 
 import { signInRequest } from '~/store/modules/auth/actions';
@@ -30,11 +31,11 @@ export default function SignIn() {
 
       <Conteudo>
         <Link to="/">
-          {background == "escuro" ?<img src={logo} width="300px" alt="devaria" />
-           : <img src={logo2} width="300px" alt="devaria" />} 
+          {background == "escuro" ? <img src={logo} width="300px" alt="devaria" />
+            : <img src={logo2} width="300px" alt="devaria" />}
         </Link>
         <div>
-          <h1 onClick={() => defineBackground()}>teste</h1>
+          <div><GiAtom color='green' onClick={() => defineBackground()} /></div>
           <Formik
             initialValues={{
               email: '',

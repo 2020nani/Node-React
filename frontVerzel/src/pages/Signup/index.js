@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { CheckBox, Container, Conteudo } from './styles'
 import { Field, Form, Formik } from 'formik';
+import { GiAtom } from "react-icons/gi";
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import logo from '~/assets/logo.svg';
@@ -43,9 +44,10 @@ export default function SignUp() {
           </div>
         </div>
         <div>
-          <h1 onClick={() => defineBackground()}>teste</h1>
+          <div ><GiAtom  color='green' onClick={() => defineBackground()} /></div>
           <Formik
             initialValues={{
+              nome:'',
               email: '',
               password: '',
               admin: false
@@ -69,14 +71,14 @@ export default function SignUp() {
                 <Field name="nome" placeholder="Digite seu nome" />
                 {errors.nome && touched.nome ? (<div style={background == "escuro" ? { color: "white" } : { color: "black" }}>{errors.nome}</div>) : null}
 
-                <Field  name="email" placeholder="Digite seu email" />
+                <Field name="email" placeholder="Digite seu email" />
                 {errors.email && touched.email ? (<div style={background == "escuro" ? { color: "white" } : { color: "black" }}>{errors.email}</div>) : null}
 
                 <Field name="password" placeholder="Digite sua senha" />
                 {errors.password && touched.password ? (<div style={background == "escuro" ? { color: "white" } : { color: "black" }}>{errors.password}</div>) : null}
-              <CheckBox>
-                <span>Cadastrar como admin </span><Field name="admin" type="checkbox" />
-              </CheckBox>
+                <CheckBox>
+                  <span>Cadastrar como admin </span><Field name="admin" type="checkbox" />
+                </CheckBox>
 
                 <button type="submit">{'Cadastrar'}</button>
 

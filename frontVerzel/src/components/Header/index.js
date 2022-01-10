@@ -1,28 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { Container, ButtonContainer, SpanContainer, Button, Nav } from '../Header/styles';
+import { Container, ButtonContainer, SpanContainer, MenuContainer, Nav } from '../Header/styles';
+import { FaElementor } from "react-icons/fa";
 import logo from '../../assets/logo.svg'
 import logo2 from '../../assets/logo2.svg'
 
 
 export default function Header(props) {
 
-  let deviceWidth = window.innerWidth;
   const { setRoute, background, setBackground } = props;
   const profile = useSelector(state => state.user.profile);
+  const [width, setWidth ] = useState();
+ 
 
-  function defineTamanhoTela(tela){
-    console.log(tela)
+  function defineHeader() {
+   setWidth(window.innerWidth)
   }
 
   function defineBackground() {
     background == "escuro" ? setBackground("claro") : setBackground("escuro")
   }
 
-  window.addEventListener('resize',defineTamanhoTela(window.innerWidth))
+  
   return (
-    <Container theme={background}>
+    width > 700 ?
+    <Container id='teste' theme={background}>
+      {window.addEventListener('resize', defineHeader)}
+      
       {profile == null ?
         <Nav> 
           {background == "escuro" ? <img onClick={() => setRoute("Aula")} width="100px" src={logo} alt="logo" />
@@ -74,7 +79,12 @@ export default function Header(props) {
       </ButtonContainer>
     </Nav>}
     </Container>
-    
+    : <MenuContainer theme={background}>
+      {window.addEventListener('resize', defineHeader)}
+      <div>
+      <span>Menu</span> <button><FaElementor color='skyblue' size={"5vw"}/></button>
+      </div>
+      </MenuContainer>
   );
 
 }

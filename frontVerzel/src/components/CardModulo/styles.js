@@ -1,7 +1,9 @@
 import styled from 'styled-components';
-export const Container = styled.div`
+export const Container = styled.button`
+disabled: true;
 width:25vw;
 height: 30vh;
+margin: 10px 0 10px 0;
 background:  ${function (props) { 
   let color = ""
   props.theme == "escuro" ? color = "rgb(36, 18, 75)" : color = "white" 
@@ -35,7 +37,7 @@ p{
     width: 35vw;
     height:20vw
 }
-@media (max-width:600px) {
+@media (max-width:700px) {
   width:100%;
   height: 90%;
   margin-top: 10px;

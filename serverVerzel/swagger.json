@@ -1,7 +1,7 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "teste Mtrix",
+        "title": "teste Verzel",
         "description": "Esta api tem o objetivo de demonstrar conhecimento em nodejs",
         "termsOfService": "A ser definido",
         "contact": {
@@ -45,21 +45,6 @@
                     }
                 },
                 "responses": {
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "error": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
                     "200": {
                         "description": "OK",
                         "content": {
@@ -90,8 +75,10 @@
                             "examples": {
                                 "user": {
                                     "value": {
+                                        "nome": "testeUsuario",
                                         "email": "teste@hotmail.com",
-                                        "password": "123456"
+                                        "password": "123456",
+                                        "admin": true
                                     }
                                 }
                             }
@@ -109,42 +96,6 @@
                                 "schema": {
                                     "type": "object",
                                     "$ref": "#/components/schemas/Usuario"
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "summary": "Deleta Usuario",
-                "description": "Essa rota e a responsavel por deletar todos os usuarios",
-                "tags": [
-                    "usuario"
-                ],
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ],
-                "responses": {
-                    "401": {
-                        "description": "Error: Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "$ref": "#/components/schemas/TokenInvalido"
-                                }
-                            }
-                        }
-                    },
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "$ref": "#/components/schemas/MensagemDelete"
                                 }
                             }
                         }
@@ -258,28 +209,43 @@
                         }
                     }
                 }
-            },
-            "get": {
-                "summary": "Busca usuario conforme id passado",
-                "description": "Essa rota e a responsavel por listar os dados de um usuario especifico",
+            }
+        },
+        "/aulas": {
+            "post": {
+                "summary": "Cadastra Aulas",
+                "description": "Essa rota e a responsavel por cadastrar novas aulas",
                 "tags": [
-                    "usuario"
+                    "aula"
                 ],
                 "security": [
                     {
                         "bearerAuth": []
                     }
                 ],
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "path",
-                        "required": true,
-                        "description": "Id do usuario que ira atualizar os dados"
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Aula"
+                            },
+                            "examples": {
+                                "aula": {
+                                    "value": {
+                                        "id": 1010,
+                                        "nome": "Nodejs",
+                                        "descricao": "Nodejs um dos melhores frame",
+                                        "modulo_id": 1,
+                                        "data": "11/10/1994 10:30",
+                                        "perfilUsuario": true
+                                    }
+                                }
+                            }
+                        }
                     }
-                ],
+                },
                 "responses": {
-                    "401": {
+                    "403": {
                         "description": "Error: Unauthorized",
                         "content": {
                             "application/json": {
@@ -290,17 +256,41 @@
                             }
                         }
                     },
-                    "500": {
-                        "description": "Internal server error",
+                    "400": {
+                        "description": "Error: Ja existe aula cadastrad com o codigo"
+                    },
+                    "200": {
+                        "description": "OK",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "properties": {
-                                        "error": {
-                                            "type": "string"
-                                        }
-                                    }
+                                    "$ref": "#/components/schemas/AulaResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Lista Aulas",
+                "description": "Essa rota e a responsavel por listar todas as aulas cadastradas",
+                "tags": [
+                    "aula"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "403": {
+                        "description": "Error: Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/TokenInvalido"
                                 }
                             }
                         }
@@ -311,25 +301,20 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "properties": {
-                                        "id": {
-                                            "type": "integer"
-                                        },
-                                        "email": {
-                                            "type": "string"
-                                        }
-                                    }
+                                    "$ref": "#/components/schemas/AulaResponse"
                                 }
                             }
                         }
                     }
                 }
-            },
-            "delete": {
-                "summary": "Deleta usuario unico",
-                "description": "Essa rota e a responsavel por deletar os dados do usuario conforme o id passado",
+            }
+        },
+        "/aulas/{id}": {
+            "put": {
+                "summary": "Atualiza cadastro Aula",
+                "description": "Essa rota e a responsavel por atualizar os dados da Aula",
                 "tags": [
-                    "usuario"
+                    "aula"
                 ],
                 "security": [
                     {
@@ -338,10 +323,75 @@
                 ],
                 "parameters": [
                     {
-                        "name": "user_id",
+                        "name": "id",
                         "in": "path",
                         "required": true,
-                        "description": "Id do usuario que ira atualizar os dados"
+                        "description": "Id da aula que ira atualizar os dados"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AulaUpdate"
+                            },
+                            "examples": {
+                                "user": {
+                                    "value": {
+                                        "nome": "aula Update",
+                                        "data": "11/10/1994 10:30",
+                                        "perfilUsuario": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "403": {
+                        "description": "Error: Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/TokenInvalido"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error: Ja existe aula cadastrad com o codigo"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/AulaResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Busca aulas conforme modulo_id passado na requisição",
+                "description": "Essa rota e a responsavel por listar os dados de uma aula especifico",
+                "tags": [
+                    "aula"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "Modulo_id da aula que ira atualizar os dados"
                     }
                 ],
                 "responses": {
@@ -356,17 +406,46 @@
                             }
                         }
                     },
-                    "500": {
-                        "description": "Internal server error",
+                    "200": {
+                        "description": "OK",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "properties": {
-                                        "error": {
-                                            "type": "string"
-                                        }
-                                    }
+                                    "$ref": "#/components/schemas/AulaResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Deleta aula unica",
+                "description": "Essa rota e a responsavel por deletar aula conforme o id passado",
+                "tags": [
+                    "aula"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "Id da aula que ira ser deletada"
+                    }
+                ],
+                "responses": {
+                    "401": {
+                        "description": "Error: Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/TokenInvalido"
                                 }
                             }
                         }
@@ -394,12 +473,12 @@
                 }
             }
         },
-        "/api/v1/produtos": {
+        "/modulos": {
             "post": {
-                "summary": "Cadastro Produto",
-                "description": "Essa rota e a responsavel por cadastrar novos produtos",
+                "summary": "Cadastra Modulo",
+                "description": "Essa rota e a responsavel por cadastrar Modulo",
                 "tags": [
-                    "produto"
+                    "modulo"
                 ],
                 "security": [
                     {
@@ -410,17 +489,13 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Produto"
+                                "$ref": "#/components/schemas/Modulo"
                             },
                             "examples": {
-                                "produto": {
+                                "modulo": {
                                     "value": {
-                                        "codigo": 1010,
-                                        "descricao": "bala de mascar",
-                                        "preco": 200.00,
-                                        "tipoEmbalagem": "1",
-                                        "quantidadeEmbalagem": 1,
-                                        "peso": 10
+                                        "nome": "Nodejs",
+                                        "perfilUsuario": true
                                     }
                                 }
                             }
@@ -428,7 +503,7 @@
                     }
                 },
                 "responses": {
-                    "401": {
+                    "403": {
                         "description": "Error: Unauthorized",
                         "content": {
                             "application/json": {
@@ -440,7 +515,7 @@
                         }
                     },
                     "400": {
-                        "description": "Error: Ja existe produto cadastrado com o codigo"
+                        "description": "Error: Ja existe modulo cadastrad com o nome"
                     },
                     "200": {
                         "description": "OK",
@@ -448,7 +523,7 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "$ref": "#/components/schemas/ProdutoResponse"
+                                    "$ref": "#/components/schemas/ModuloResponse"
                                 }
                             }
                         }
@@ -456,10 +531,10 @@
                 }
             },
             "get": {
-                "summary": "Lista Produtos",
-                "description": "Essa rota e a responsavel por listar todos produtos cadastrados",
+                "summary": "Lista Modulos",
+                "description": "Essa rota e a responsavel por listar todos os modulos cadastrados",
                 "tags": [
-                    "produto"
+                    "modulo"
                 ],
                 "security": [
                     {
@@ -467,7 +542,7 @@
                     }
                 ],
                 "responses": {
-                    "401": {
+                    "403": {
                         "description": "Error: Unauthorized",
                         "content": {
                             "application/json": {
@@ -484,7 +559,7 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "$ref": "#/components/schemas/Produto"
+                                    "$ref": "#/components/schemas/ModuloResponse"
                                 }
                             }
                         }
@@ -492,12 +567,12 @@
                 }
             }
         },
-        "/api/v1/produto/{codigo}": {
+        "/modulos/{id}": {
             "put": {
-                "summary": "Atualiza cadastro Produto",
-                "description": "Essa rota e a responsavel por atualizar os dados do produto",
+                "summary": "Atualiza cadastro Modulo",
+                "description": "Essa rota e a responsavel por atualizar os dados da Aula",
                 "tags": [
-                    "produto"
+                    "modulo"
                 ],
                 "security": [
                     {
@@ -506,26 +581,22 @@
                 ],
                 "parameters": [
                     {
-                        "name": "codigo",
+                        "name": "id",
                         "in": "path",
                         "required": true,
-                        "description": "Codigo do produto que ira atualizar os dados"
+                        "description": "Id do modulo que ira atualizar os dados"
                     }
                 ],
                 "requestBody": {
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/ProdutoUpdate"
+                                "$ref": "#/components/schemas/ModuloUpdate"
                             },
                             "examples": {
                                 "user": {
                                     "value": {
-                                        "descricao": "bala de mascar de chiclete",
-                                        "preco": 200.00,
-                                        "tipoEmbalagem": "1",
-                                        "quantidadeEmbalagem": 1,
-                                        "peso": 50
+                                        "nome": "modulo Update"
                                     }
                                 }
                             }
@@ -533,7 +604,7 @@
                     }
                 },
                 "responses": {
-                    "401": {
+                    "403": {
                         "description": "Error: Unauthorized",
                         "content": {
                             "application/json": {
@@ -545,7 +616,7 @@
                         }
                     },
                     "400": {
-                        "description": "Error: So e permitido 1 embalagem para este tipo de embalagem"
+                        "description": "Error: Ja existe modulo cadastrad com o id"
                     },
                     "200": {
                         "description": "OK",
@@ -553,7 +624,11 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "$ref": "#/components/schemas/ProdutoResponse"
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -561,10 +636,10 @@
                 }
             },
             "get": {
-                "summary": "Busca produto conforme codigo passado na requisição",
-                "description": "Essa rota e a responsavel por listar os dados de um produto especifico",
+                "summary": "Busca modulo conforme id passado na requisição",
+                "description": "Essa rota e a responsavel por listar um modulo especifico",
                 "tags": [
-                    "produto"
+                    "modulo"
                 ],
                 "security": [
                     {
@@ -573,10 +648,10 @@
                 ],
                 "parameters": [
                     {
-                        "name": "codigo",
+                        "name": "id",
                         "in": "path",
                         "required": true,
-                        "description": "Codigo do produto que ira atualizar os dados"
+                        "description": "Id do modulo que ira atualizar os dados"
                     }
                 ],
                 "responses": {
@@ -587,21 +662,6 @@
                                 "schema": {
                                     "type": "object",
                                     "$ref": "#/components/schemas/TokenInvalido"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Internal server error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "error": {
-                                            "type": "string"
-                                        }
-                                    }
                                 }
                             }
                         }
@@ -612,7 +672,7 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "$ref": "#/components/schemas/Produto"
+                                    "$ref": "#/components/schemas/ModuloResponse"
                                 }
                             }
                         }
@@ -620,10 +680,10 @@
                 }
             },
             "delete": {
-                "summary": "Deleta produto unico",
-                "description": "Essa rota e a responsavel por deletar os dados do produto conforme o codigo passado",
+                "summary": "Deleta modulo unico",
+                "description": "Essa rota e a responsavel por deletar modulo conforme o id passado",
                 "tags": [
-                    "produto"
+                    "modulo"
                 ],
                 "security": [
                     {
@@ -632,10 +692,10 @@
                 ],
                 "parameters": [
                     {
-                        "name": "codigo",
+                        "name": "id",
                         "in": "path",
                         "required": true,
-                        "description": "Codigo do produto que ira atualizar os dados"
+                        "description": "Id do modulo que ira ser deletado"
                     }
                 ],
                 "responses": {
@@ -646,21 +706,6 @@
                                 "schema": {
                                     "type": "object",
                                     "$ref": "#/components/schemas/TokenInvalido"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Internal server error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "error": {
-                                            "type": "string"
-                                        }
-                                    }
                                 }
                             }
                         }
@@ -694,6 +739,9 @@
             "Usuario": {
                 "type": "object",
                 "properties": {
+                    "nome": {
+                        "type": "string"
+                    },
                     "email": {
                         "type": "string"
                     },
@@ -722,96 +770,142 @@
             "UsuarioLogado": {
                 "type": "object",
                 "properties": {
-                    "id": {
-                        "type": "integer"
-                    },
-                    "email": {
-                        "type": "string"
+                    "user": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "integer"
+                            },
+                            "email": {
+                                "type": "string"
+                            },
+                            "admin": {
+                                "type": "boolean"
+                            }
+                        }
                     },
                     "token": {
                         "type": "string"
                     }
                 }
             },
-            "Produto": {
+            "Aula": {
                 "type": "object",
                 "properties": {
-                    "codigo": {
+                    "nome": {
                         "type": "string"
                     },
                     "descricao": {
                         "type": "string"
                     },
-                    "preco": {
-                        "type": "bigdecimal"
-                    },
-                    "tipoEmbalagem": {
-                        "type": "string"
-                    },
-                    "quantidadeEmbalagem": {
+                    "modulo_id": {
                         "type": "integer"
                     },
-                    "peso": {
-                        "type": "integer"
-                    }
-                }
-            },
-            "ProdutoResponse": {
-                "type": "object",
-                "properties": {
-                    "codigo": {
+                    "data": {
                         "type": "string"
                     }
                 }
             },
-            "ProdutoUpdate": {
+            "AulaResponse": {
                 "type": "object",
                 "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "nome": {
+                        "type": "string"
+                    },
                     "descricao": {
                         "type": "string"
                     },
-                    "preco": {
-                        "type": "bigdecimal"
-                    },
-                    "tipoEmbalagem": {
-                        "type": "string"
-                    },
-                    "quantidadeEmbalagem": {
-                        "type": "integer"
-                    },
-                    "peso": {
-                        "type": "integer"
-                    }
-                }
-            },
-            "TokenInvalido": {
-                "type": "object",
-                "properties": {
-                    "error": {
-                        "type": "string"
-                    }
-                }
-            },
-            "MensagemDelete": {
-                "type": "object",
-                "properties": {
-                    "message": {
+                    "modulo": {
                         "type": "object",
                         "properties": {
-                            "mensagem": {
+                            "id": {
+                                "type": "integer"
+                            },
+                            "nome": {
                                 "type": "string"
                             }
+                        }
+                    },
+                    "data": {
+                        "type": "string"
+                    }
+                }
+            },
+            "AulaUpdate": {
+                "type": "object",
+                "properties": {
+                    "nome": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "type": "string"
+                    },
+                    "perfilUsuario": {
+                        "type": "boolean"
+                    }
+                }
+            },
+            "Modulo": {
+                "type": "object",
+                "properties": {
+                    "nome": {
+                        "type": "string"
+                    },
+                    "perfilUsuario": {
+                        "type": "boolean"
+                    }
+                }
+            },
+            "ModuloResponse": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "nome": {
+                        "type": "string"
+                    }
+                }
+        },
+        "ModuloUpdate": {
+            "type": "object",
+            "properties": {
+                "nome": {
+                    "type": "string"
+                }
+            }
+        },
+        "TokenInvalido": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                }
+            }
+        },
+        "MensagemDelete": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "object",
+                    "properties": {
+                        "mensagem": {
+                            "type": "string"
                         }
                     }
                 }
             }
-        },
-        "securitySchemes": {
-            "bearerAuth": {
-                "type": "http",
-                "scheme": "bearer",
-                "bearerFormat": "JWT"
-            }
+        }
+    },
+    "securitySchemes": {
+        "bearerAuth": {
+            "type": "http",
+            "scheme": "bearer",
+            "bearerFormat": "JWT"
         }
     }
+}
 }

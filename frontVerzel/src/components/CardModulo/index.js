@@ -12,7 +12,7 @@ export default function CardModulo(props) {
 
     <Container onClick={() => listarAulasPorModulo(modulo.modulo.id)} theme={background} >
 
-      <Conteudo>
+      <Conteudo  >
       <div style={{display:"flex", justifyContent:"space-between", alignItems:"flex-start", width: "11vw"}}>
           <img src={icon} alt='icon'></img>
           <div style={{display:"flex", marginLeft:"6px", flexDirection:"column"}}>

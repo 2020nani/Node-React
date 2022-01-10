@@ -37,8 +37,7 @@ class UserController {
     return res.json({
       id,
       nome,
-      email,
-      admin
+      email
     });
   }
 

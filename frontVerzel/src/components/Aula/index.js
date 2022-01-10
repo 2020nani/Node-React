@@ -3,6 +3,7 @@ import { Container, Conteudo, ModuloContainer, AulaContainer } from './styles'
 import CardModulo from '../CardModulo/index'
 import CardAula from '../CardAula/index'
 import ordenarOrdemAlfabetica from '../Utils/ordenarOrdemAlfabetica'
+import { toast } from 'react-toastify';
 import api from '../../services/api';
 
 
@@ -27,10 +28,15 @@ export default function Aula(props) {
 
 
   async function listarAulasPorModulo(modulo_id) {
+    try{
     const response = await api.get(`aulas/${modulo_id}`);
     let aulaOrdemAlfabetica = ordenarOrdemAlfabetica(response.data.aulaFormatada)
     setModuloAulaEscolhida(aulaOrdemAlfabetica[0].modulo)
     setAulas(aulaOrdemAlfabetica)
+    }catch(err){
+      toast.success("Este modulo nao possui aulas para serem carregadas")
+    }
+    
   }
   
   return (

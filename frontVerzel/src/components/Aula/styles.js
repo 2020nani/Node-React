@@ -20,7 +20,7 @@ export const Conteudo = styled.div`
 width: 80vw;
 max-width: 80vw;
 @media (max-width:400px) {
-    max-width:300px
+    width:100vw
   }
 `
 export const ModuloContainer = styled.div`
@@ -32,8 +32,9 @@ max-width: 80vw;
 @media (max-width:1100px) {
   grid-template-columns: repeat(2, 1fr);
   }
-@media (max-width:600px) {
+@media (max-width:700px) {
     grid-template-columns: repeat(1, 1fr);
+    margin: 0
 }
 `
 export const AulaContainer = styled.div`
@@ -46,7 +47,8 @@ max-width: 80vw;
 @media (max-width:1100px) {
   grid-template-columns: repeat(2, 1fr);
   }
-  @media (max-width:600px) {
+  @media (max-width:700px) {
     grid-template-columns: repeat(1, 1fr);
+    margin: 0
 }
 `
