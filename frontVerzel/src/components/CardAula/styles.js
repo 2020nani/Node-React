@@ -20,7 +20,7 @@ font-family: Arial, Helvetica, sans-serif;
   @media (max-width:1100px) {
     width:30vw
 };
-@media (max-width:600px) {
+@media (max-width:700px) {
   width:80vw
 }
 `
