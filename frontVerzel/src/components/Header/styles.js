@@ -28,6 +28,10 @@ span{
         props.theme == "escuro" ? color = "green" : color = "blue" 
         return color } };
     }
+    @media (max-width:1100px) {
+        width:6vw;
+        font-size: 0.8rem;
+    }
 }
 button{
   width: 8vw;
@@ -49,10 +53,10 @@ button{
   padding: 0 15px;
   margin-top: 2vh;
   margin-bottom: 2vh;
-  font-size:16px;
   &::placeholder{
   color: (240, 248, 255, 0.1)
   }
+};
 }
 `
 export const SpanContainer = styled.div`
