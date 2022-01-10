@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Container, ButtonContainer, SpanContainer, MenuContainer, Nav } from '../Header/styles';
@@ -12,8 +12,12 @@ export default function Header(props) {
   const { setRoute, background, setBackground } = props;
   const profile = useSelector(state => state.user.profile);
   const [width, setWidth ] = useState();
- 
 
+  useEffect(() => {
+    defineHeader()
+  }, []);
+ 
+ 
   function defineHeader() {
    setWidth(window.innerWidth)
   }
@@ -23,7 +27,8 @@ export default function Header(props) {
   }
 
   
-  return (
+  return (console.log(width),
+    
     width > 700 ?
     <Container id='teste' theme={background}>
       {window.addEventListener('resize', defineHeader)}
