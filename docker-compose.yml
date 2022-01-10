@@ -18,7 +18,7 @@ services:
       dockerfile: ./dockerfile
       context: ./serverVerzel
     command: >
-      sh -c "npm install &&
+      sh -c "yarn &&
       yarn sequelize db:migrate
       && npm start"
     ports:
