@@ -32,6 +32,8 @@ Pronto ja temos as 2 aplicações rodando juntamente com o banco de dados postgr
 Feito isso voce pode acessar a api em seu computador na porta 3333 e a documentacao dela na url http://localhost:3333/api-docs
 Obs: Certifique que o container docker foi criado e esta rodando
 
+Caso queira testar via postman dentro da pasta assets que se encontra na pasta raiz serverVerzel ha uma collection
+
 Feito isso voce pode acessar a front em seu computador no endereco http://localhost:3000 e nosso projeto estara rodando dentro dos containers docker
 Obs: Certifique que o container docker foi criado e esta rodando
 
