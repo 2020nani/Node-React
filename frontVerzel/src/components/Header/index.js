@@ -44,7 +44,7 @@ export default function Header(props) {
             <span>DevStars</span>
           </SpanContainer>
           <ButtonContainer>
-            <button><Link to="/login">Entrar</Link></button>
+            <button><Link  to="/login">Entrar</Link></button>
             <button onClick={() => defineBackground()}>{background == "escuro" ?
               "Claro" : "Escuro"}</button>
           </ButtonContainer>

@@ -112,12 +112,11 @@ h2{
 export const DescricaoAula = styled.li`
 display:flex;
 width: 18vw;
-height: 8vh;
 justify-content:flex-start;
 align-items:center;
 margin: 3vh 4vw 2vh 0;
 h3{
-  color: white;
+  color: green;
 }
 @media (max-width:1100px) {
   width:25vw

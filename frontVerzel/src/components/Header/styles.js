@@ -14,6 +14,9 @@ background: ${function (props) {
 img{
   width: 13vw;
 }
+a{
+  text-decoration: none
+}
 span{
   width:11vw;
   font-size: 1.1rem;
