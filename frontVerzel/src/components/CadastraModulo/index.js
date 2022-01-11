@@ -4,8 +4,8 @@ import * as Yup from 'yup';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { Container, Conteudo } from './styles';
-import logo from '../../assets/logo.svg';
-import logo2 from '../../assets/logo2.svg';
+import logo from '../../assets/logo2.png';
+import logo2 from '../../assets/logo2.png';
 import api from '../../services/api';
 
 const schema = Yup.object().shape({

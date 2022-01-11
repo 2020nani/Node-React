@@ -5,8 +5,8 @@ import { Field, Form, Formik } from 'formik';
 import { GiAtom } from "react-icons/gi";
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
-import logo from '~/assets/logo.svg';
-import logo2 from '~/assets/logo2.svg';
+import logo from '~/assets/logo2.png';
+import logo2 from '~/assets/logo2.png';
 import { signUpRequest } from '~/store/modules/auth/actions';
 
 const schema = Yup.object().shape({

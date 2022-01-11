@@ -7,8 +7,8 @@ import { GiAtom } from "react-icons/gi";
 import * as Yup from 'yup';
 
 import { signInRequest } from '~/store/modules/auth/actions';
-import logo2 from '~/assets/logo2.svg';
-import logo from '~/assets/logo.svg';
+import logo2 from '~/assets/logo2.png';
+import logo from '~/assets/logo2.png';
 
 const schema = Yup.object().shape({
   email: Yup.string()

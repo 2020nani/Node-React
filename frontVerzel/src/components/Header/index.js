@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Container, ButtonContainer, SpanContainer, MenuContainer, Nav } from '../Header/styles';
 import { FaElementor } from "react-icons/fa";
-import logo from '../../assets/logo.svg'
-import logo2 from '../../assets/logo2.svg'
+import logo from '../../assets/logo2.png'
+import logo2 from '../../assets/logo2.png'
 
 
 export default function Header(props) {
